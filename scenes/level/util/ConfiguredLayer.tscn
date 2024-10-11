@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj8wxwi68wm0h"]
+
+[ext_resource type="TileSet" uid="uid://dvqwr0ci0x55u" path="res://resources/tiles.tres" id="1_nfa3p"]
+
+[node name="TileMapLayer" type="TileMapLayer"]
+y_sort_enabled = true
+tile_set = ExtResource("1_nfa3p")
