@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://bl55t1alqb62d"]
+[gd_scene load_steps=8 format=4 uid="uid://bl55t1alqb62d"]
 
 [ext_resource type="Script" path="res://scenes/ui/MainMenu.cs" id="1_lxn66"]
 [ext_resource type="TileSet" uid="uid://dvqwr0ci0x55u" path="res://resources/tiles.tres" id="2_wkxco"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://iv4rk5h4ybki" path="res://scenes/level/util/ElevationLayer.tscn" id="3_yrho3"]
 [ext_resource type="PackedScene" uid="uid://bky5c7di5gcc0" path="res://scenes/GoldMine.tscn" id="4_v35bm"]
 [ext_resource type="PackedScene" uid="uid://bb2ug053frok2" path="res://scenes/building/Village.tscn" id="5_e4a3i"]
+[ext_resource type="PackedScene" uid="uid://pvogy2cll6kq" path="res://scenes/ui/LevelSelectScreen.tscn" id="7_o0tdj"]
 
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_lxn66")
@@ -64,41 +65,48 @@ position = Vector2(640, 398)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="MainMenuContainer" type="MarginContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MainMenuContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenuContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenuContainer/PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="PlayButton" type="Button" parent="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="CanvasLayer/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Play"
 
-[node name="OptionsButton" type="Button" parent="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="CanvasLayer/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Options"
 
-[node name="QuitButton" type="Button" parent="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="CanvasLayer/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Quit"
+
+[node name="LevelSelectScreen" parent="CanvasLayer" instance=ExtResource("7_o0tdj")]
+unique_name_in_owner = true
 
 [editable path="YSortRoot/BaseTerrainTileMapLayer/ElevationLayer"]

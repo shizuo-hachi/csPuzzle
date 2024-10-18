@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://0b7icpp7al8y" path="res://resources/building/tower.tres" id="2_2jsg4"]
 [ext_resource type="Resource" uid="uid://ckgl0k8fdrdrn" path="res://resources/building/village.tres" id="3_7ve0q"]
 [ext_resource type="PackedScene" uid="uid://cyjfv46rgge8r" path="res://scenes/ui/BuildingSection.tscn" id="4_7wh7e"]
-[ext_resource type="Texture2D" uid="uid://bgp2e26wnjnqs" path="res://assets/wood_icon.png" id="5_hw7tr"]
+[ext_resource type="Texture2D" uid="uid://bgp2e26wnjnqs" path="res://assets/ui/wood_icon.png" id="5_hw7tr"]
 [ext_resource type="PackedScene" uid="uid://cmsjxmmpfnxft" path="res://scenes/ui/PauseScreen.tscn" id="5_mq0cu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1juxw"]

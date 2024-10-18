@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="LevelDefinitionResource" load_steps=2 format=3 uid="uid://dncjvwmtcwies"]
+[gd_resource type="Resource" script_class="LevelDefinitionResource" load_steps=2 format=3 uid="uid://bey5tv3r5s8qd"]
 
-[ext_resource type="Script" path="res://resources/level/LevelDefinitionResource.cs" id="1_y4qqd"]
+[ext_resource type="Script" path="res://resources/level/LevelDefinitionResource.cs" id="1_na8ii"]
 
 [resource]
-script = ExtResource("1_y4qqd")
+script = ExtResource("1_na8ii")
 Id = "cats_are_playing"
 StartingResourceCount = 6
 LevelScenePath = "res://scenes/level/Level2.tscn"

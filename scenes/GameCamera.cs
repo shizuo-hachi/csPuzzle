@@ -42,7 +42,7 @@ public partial class GameCamera : Camera2D
 	public override void _Input(InputEvent @event)
 	{
 		
-		if (!DisplayServer.WindowIsFocused((int)DisplayServer.MainWindowId))
+		if (!DisplayServer.WindowIsFocused())
 		{
 			DisplayServer.MouseSetMode(DisplayServer.MouseMode.Captured);
 		}

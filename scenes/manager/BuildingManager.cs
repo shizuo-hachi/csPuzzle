@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using Game.Building;
 using Game.Component;
@@ -16,8 +15,6 @@ public partial class BuildingManager : Node
 
 	[Signal] public delegate void AvailableResourceCountChangedEventHandler(int availableResourceCount);
 
-	[Export]
-	private int startingResourceCount = 4;
 	[Export]
 	private GridManager gridManager;
 	[Export]
@@ -39,6 +36,7 @@ public partial class BuildingManager : Node
 	private Rect2I hoveredGridArea = new(Vector2I.Zero, Vector2I.One);
 	private BuildingGhost buildingGhost;
 	private State currentState;
+	private int startingResourceCount;
 
 	private int AvailableResourceCount => startingResourceCount + currentResourceCount - currentlyUsedResourceCount;
 
@@ -80,13 +78,6 @@ public partial class BuildingManager : Node
 	public override void _Process(double delta)
 	{
 		var mouseGridPosition = gridManager.GetMouseGridCellPosition();
-		var rootCell = hoveredGridArea.Position;
-		if (rootCell != mouseGridPosition)
-		{
-			hoveredGridArea.Position = mouseGridPosition;
-			UpdateHoveredGridArea();
-		}
-
 		switch (currentState)
 		{
 			case State.Normal:
@@ -95,6 +86,18 @@ public partial class BuildingManager : Node
 				buildingGhost.GlobalPosition = mouseGridPosition * 64;
 				break;
 		}
+		
+		var rootCell = hoveredGridArea.Position;
+        if (rootCell != mouseGridPosition)
+        {
+        	hoveredGridArea.Position = mouseGridPosition;
+        	UpdateHoveredGridArea();
+        }
+	}
+
+	public void SetStartingResourceCount(int count)
+	{
+		startingResourceCount = count;
 	}
 
 	private void UpdateGridDisplay()
@@ -105,12 +108,13 @@ public partial class BuildingManager : Node
 		{
 			gridManager.HighlightExpandedBuildableTiles(hoveredGridArea, toPlaceBuildingResource.BuildableRadius);
 			gridManager.HighlightResourceTiles(hoveredGridArea, toPlaceBuildingResource.ResourceRadius);
-			buildingGhost.SetValid();
+			buildingGhost.SetValid(buildingGhost.GetNode<Sprite2D>("%UpDownRoot/Sprite"));
 		}
 		else
 		{
-			buildingGhost.SetInvalid();
+			buildingGhost.SetInvalid(buildingGhost.GetNode<Sprite2D>("%UpDownRoot/Sprite"));
 		}
+		buildingGhost.DoHoverAnimation();
 	}
 
 	private void PlaceBuildingAtHoveredCellPosition()
@@ -206,8 +210,13 @@ public partial class BuildingManager : Node
 		ChangeState(State.PlacingBuilding);
 		hoveredGridArea.Size = buildingResource.Dimensions;
 		var buildingSprite = buildingResource.SpriteScene.Instantiate<Sprite2D>();
-		buildingGhost.AddChild(buildingSprite);
+		buildingSprite.Name = "Sprite";
+		buildingGhost.AddSpriteNode(buildingSprite);
+		buildingSprite.SetUniqueNameInOwner(true);
+		
+		buildingGhost.SetDimensions(buildingResource.Dimensions);
 		toPlaceBuildingResource = buildingResource;
 		UpdateGridDisplay();
 	}
+	
 }
